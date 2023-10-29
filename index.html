@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <audio id="clickSound">
+        <source src="audio/beep-sound-8333.mp3" type="audio/mpeg">
+    </audio>
+    <div class="calculator">
+        <div class="buttons">
+            <form>
+                <div>
+                    <input style="height: 90px;width: 490px;border-radius: 5%;margin-top: 30px;" class="display-box"
+                        type="text" id="result" disabled>
+                </div>
+                <div style="padding-top: 20px;" class="firstbuttons">
+                    <input style="background-color:#55565f;box-shadow: 0px 5px 0px #2e2f38, 0px 5px 5px #2e2f38;"
+                        type="button" value="C" onclick="clearScreen();buttonClick();">
+                    <input style="background-color: #55565f;box-shadow: 0px 5px 0px #2e2f38, 0px 5px 5px #2e2f38;"
+                        type="button" value="+/-" onclick="signs();buttonClick();">
+                    <input style="background-color: #55565f;box-shadow: 0px 5px 0px #2e2f38, 0px 5px 5px #2e2f38;"
+                        type="button" value="%" onclick="percentage();buttonClick();">
+                    <input
+                        style="background-color: #ffc24d;color: #332b1b;box-shadow: 0px 5px 0px #ffc24d, 0px 5px 5px #ffc24d;"
+                        type="button" value="÷" onclick="divide();buttonClick();">
+                </div>
+
+                <div class="secbuttons">
+                    <input type="button" value="7" onclick="display('7');buttonClick();">
+                    <input type="button" value="8" onclick="display('8');buttonClick();">
+                    <input type="button" value="9" onclick="display('9');buttonClick();">
+                    <input
+                        style="background-color: #ffc24d;color: #332b1b;box-shadow: 0px 5px 0px #ffc24d, 0px 5px 5px #ffc24d;"
+                        type="button" value="×" onclick="multiply();buttonClick();">
+                </div>
+
+                <div class="thirdbuttons">
+                    <input type="button" value="4" onclick="display('4');buttonClick();">
+                    <input type="button" value="5" onclick="display('5');buttonClick();">
+                    <input type="button" value="6" onclick="display('6');buttonClick();">
+                    <input
+                        style="background-color: #ffc24d;color: #332b1b;box-shadow: 0px 5px 0px #ffc24d, 0px 5px 5px #ffc24d;"
+                        type="button" value="-" onclick="display('-');buttonClick();">
+                </div>
+
+                <div class="fourthbuttons">
+                    <input type="button" value="1" onclick="display('1');buttonClick();">
+                    <input type="button" value="2" onclick="display('2');buttonClick();">
+                    <input type="button" value="3" onclick="display('3');buttonClick();">
+                    <input
+                        style="background-color: #ffc24d;color: #332b1b;box-shadow: 0px 5px 0px #ffc24d, 0px 5px 5px #ffc24d;"
+                        type="button" value="+" onclick="display('+');buttonClick();">
+                </div>
+
+                <div class="fifbuttons">
+                    <input type="button" value="." onclick="display('.');buttonClick();">
+                    <input type="button" value="0" onclick="display('0');buttonClick();">
+                    <input type="button" value="←" onclick="Back('←');buttonClick();">
+                    <input
+                        style="background-color: #ffc24d;color: #332b1b;color: #332b1b;box-shadow: 0px 5px 0px #ffc24d, 0px 5px 5px #ffc24d;"
+                        type="button" value="=" onclick="calculate();buttonClick();">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</body>
+<script>
+    clearScreen = () => {
+        document.getElementById("result").value = "";
+    }
+    display = (value) => {
+        document.getElementById("result").value += value;
+    }
+    calculate = () => {
+        var p = document.getElementById("result").value;
+        var q = eval(p);
+        document.getElementById("result").value = q;
+    }
+    multiply = () => {
+        var currentValue = document.getElementById("result").value;
+        document.getElementById("result").value = currentValue + '*';
+    }
+    divide = () => {
+        var currentValue = document.getElementById("result").value;
+        document.getElementById("result").value = currentValue + '/';
+    }
+    percentage = () => {
+        var currentValue = document.getElementById("result").value;
+        var percentageans = parseFloat(currentValue) / 100
+        document.getElementById("result").value = percentageans;
+    }
+    Back = () => {
+        var ev = document.getElementById('result');
+        ev.value = ev.value.slice(0, -1);
+    }
+    signs = () => {
+        var currentValue = document.getElementById("result").value;
+        if (!isNaN(currentValue)) {
+            var newValue = parseFloat(currentValue) * -1;
+            document.getElementById("result").value = newValue;
+        }
+    }
+    function buttonClick() {
+    document.getElementById("clickSound").play();
+    }
+</script>
+</html>
